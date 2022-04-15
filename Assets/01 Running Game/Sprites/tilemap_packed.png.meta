@@ -64,7 +64,7 @@ TextureImporter:
     second: tilemap_packed_19
   - first:
       213: 1724406721867405357
-    second: tilemap_packed_20
+    second: Cyan Guy Walk 1
   - first:
       213: 2772701748520179734
     second: tilemap_packed_21
@@ -88,10 +88,10 @@ TextureImporter:
     second: tilemap_packed_27
   - first:
       213: 676389156815778814
-    second: tilemap_packed_28
+    second: Cyan Guy Walk 3
   - first:
       213: -6784488196640772561
-    second: tilemap_packed_29
+    second: Cyan Guy Walk 4
   - first:
       213: -1922718596493688381
     second: tilemap_packed_30
@@ -154,7 +154,7 @@ TextureImporter:
     second: tilemap_packed_49
   - first:
       213: -4970067154865029653
-    second: tilemap_packed_50
+    second: Blue Guy Walk 1
   - first:
       213: -2452500989543857958
     second: tilemap_packed_51
@@ -178,10 +178,10 @@ TextureImporter:
     second: tilemap_packed_57
   - first:
       213: 2128294600738411159
-    second: tilemap_packed_58
+    second: Blue Guy Walk 3
   - first:
       213: 3043803401794877445
-    second: tilemap_packed_59
+    second: Blue Guy Walk4
   - first:
       213: 4549779110591665459
     second: tilemap_packed_60
@@ -334,7 +334,7 @@ TextureImporter:
     second: tilemap_packed_109
   - first:
       213: 1634769560281053603
-    second: tilemap_packed_110
+    second: Yellow Guy Walk 1
   - first:
       213: -1418923579919195282
     second: tilemap_packed_111
@@ -358,10 +358,10 @@ TextureImporter:
     second: tilemap_packed_117
   - first:
       213: -7424527936417855760
-    second: tilemap_packed_118
+    second: Yellow Guy Walk 3
   - first:
       213: -4404043426273885130
-    second: tilemap_packed_119
+    second: Yellow Guy Walk 4
   - first:
       213: 4224408330027904234
     second: Grass Patch Endcap
@@ -424,7 +424,7 @@ TextureImporter:
     second: tilemap_packed_139
   - first:
       213: 8057209302347806090
-    second: tilemap_packed_140
+    second: Brown Guy Walk 1
   - first:
       213: 3461437795501700288
     second: tilemap_packed_141
@@ -448,10 +448,10 @@ TextureImporter:
     second: tilemap_packed_147
   - first:
       213: -8619585373112257217
-    second: tilemap_packed_148
+    second: Brown Guy Walk 3
   - first:
       213: -5006229103885450298
-    second: tilemap_packed_149
+    second: Brown Guy Walk 4
   - first:
       213: -8176512502366645725
     second: Grass Patch Begin Cap
@@ -2619,8 +2619,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -3097,7 +3097,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_20
+      name: Cyan Guy Walk 1
       rect:
         serializedVersion: 2
         x: 420
@@ -3265,7 +3265,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_28
+      name: Cyan Guy Walk 3
       rect:
         serializedVersion: 2
         x: 588
@@ -3286,7 +3286,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_29
+      name: Cyan Guy Walk 4
       rect:
         serializedVersion: 2
         x: 609
@@ -3727,7 +3727,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_50
+      name: Blue Guy Walk 1
       rect:
         serializedVersion: 2
         x: 420
@@ -3895,7 +3895,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_58
+      name: Blue Guy Walk 3
       rect:
         serializedVersion: 2
         x: 588
@@ -3916,7 +3916,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_59
+      name: Blue Guy Walk4
       rect:
         serializedVersion: 2
         x: 609
@@ -4987,7 +4987,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_110
+      name: Yellow Guy Walk 1
       rect:
         serializedVersion: 2
         x: 420
@@ -5155,7 +5155,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_118
+      name: Yellow Guy Walk 3
       rect:
         serializedVersion: 2
         x: 588
@@ -5176,7 +5176,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_119
+      name: Yellow Guy Walk 4
       rect:
         serializedVersion: 2
         x: 609
@@ -5617,7 +5617,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_140
+      name: Brown Guy Walk 1
       rect:
         serializedVersion: 2
         x: 420
@@ -5785,7 +5785,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_148
+      name: Brown Guy Walk 3
       rect:
         serializedVersion: 2
         x: 588
@@ -5806,7 +5806,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_149
+      name: Brown Guy Walk 4
       rect:
         serializedVersion: 2
         x: 609

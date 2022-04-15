@@ -30,7 +30,7 @@ namespace Scripts
         [SerializeField] private Transform character;
         [SerializeField] private SpriteRenderer characterSprite;
         [SerializeField] private AnimationCurve jumpPosition;
-        
+        [SerializeField] private Animator animator;
         private bool canJump = true;
 
         /// <summary>
@@ -48,6 +48,8 @@ namespace Scripts
             {   // first we disable the jump, then start the Coroutine that handles the jump and invoke the event
                 canJump = false;
                 StartCoroutine(JumpRoutine());
+                AudioController.AInstance.PlayJumpSound();
+                animator.SetBool("IsJumping", true);
                 onJump?.Invoke();
             }
         }
@@ -88,6 +90,7 @@ namespace Scripts
                 if (sampleTime > 0.95f)
                 {
                     canJump = true;
+                    animator.SetBool("IsJumping", false);
                 }
                 // yield return null waits a single frame
                 yield return null;
