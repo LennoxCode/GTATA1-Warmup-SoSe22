@@ -67,7 +67,7 @@ TextureImporter:
     second: Cyan Guy Walk 1
   - first:
       213: 2772701748520179734
-    second: tilemap_packed_21
+    second: Cyan Guy Jump 1
   - first:
       213: -8536881040180527926
     second: tilemap_packed_22
@@ -85,7 +85,7 @@ TextureImporter:
     second: tilemap_packed_26
   - first:
       213: 6481843683198900548
-    second: tilemap_packed_27
+    second: Cyan Guy Jump 2
   - first:
       213: 676389156815778814
     second: Cyan Guy Walk 3
@@ -157,7 +157,7 @@ TextureImporter:
     second: Blue Guy Walk 1
   - first:
       213: -2452500989543857958
-    second: tilemap_packed_51
+    second: Blue Guy Jump 1
   - first:
       213: -5337296085697385273
     second: tilemap_packed_52
@@ -175,7 +175,7 @@ TextureImporter:
     second: tilemap_packed_56
   - first:
       213: 5343863954073821178
-    second: tilemap_packed_57
+    second: Blue Guy Jump 2
   - first:
       213: 2128294600738411159
     second: Blue Guy Walk 3
@@ -247,7 +247,7 @@ TextureImporter:
     second: Pink Guy Walk 1
   - first:
       213: 4723573226442331577
-    second: Pink Guy 2
+    second: Pink Guy Jump 1
   - first:
       213: 921575226733875989
     second: Pink Guy Ducking
@@ -265,7 +265,7 @@ TextureImporter:
     second: tilemap_packed_86
   - first:
       213: 6443106307679986694
-    second: tilemap_packed_87
+    second: Pink Guy Jump 2
   - first:
       213: -8577901098906674100
     second: Pink Guy Walk3
@@ -337,7 +337,7 @@ TextureImporter:
     second: Yellow Guy Walk 1
   - first:
       213: -1418923579919195282
-    second: tilemap_packed_111
+    second: Yellow Guy Jump 1
   - first:
       213: -18749464724257583
     second: tilemap_packed_112
@@ -355,7 +355,7 @@ TextureImporter:
     second: tilemap_packed_116
   - first:
       213: -1328245000158916608
-    second: tilemap_packed_117
+    second: Yellow Guy Jump 2
   - first:
       213: -7424527936417855760
     second: Yellow Guy Walk 3
@@ -427,7 +427,7 @@ TextureImporter:
     second: Brown Guy Walk 1
   - first:
       213: 3461437795501700288
-    second: tilemap_packed_141
+    second: Brown Guy Jump 1
   - first:
       213: -440023909301632197
     second: tilemap_packed_142
@@ -445,7 +445,7 @@ TextureImporter:
     second: tilemap_packed_146
   - first:
       213: 4068956031141271483
-    second: tilemap_packed_147
+    second: Brown Guy Jump 2
   - first:
       213: -8619585373112257217
     second: Brown Guy Walk 3
@@ -3118,7 +3118,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_21
+      name: Cyan Guy Jump 1
       rect:
         serializedVersion: 2
         x: 441
@@ -3244,7 +3244,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_27
+      name: Cyan Guy Jump 2
       rect:
         serializedVersion: 2
         x: 567
@@ -3748,7 +3748,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_51
+      name: Blue Guy Jump 1
       rect:
         serializedVersion: 2
         x: 441
@@ -3874,7 +3874,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_57
+      name: Blue Guy Jump 2
       rect:
         serializedVersion: 2
         x: 567
@@ -4378,7 +4378,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Pink Guy 2
+      name: Pink Guy Jump 1
       rect:
         serializedVersion: 2
         x: 441
@@ -4504,7 +4504,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_87
+      name: Pink Guy Jump 2
       rect:
         serializedVersion: 2
         x: 567
@@ -5008,7 +5008,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_111
+      name: Yellow Guy Jump 1
       rect:
         serializedVersion: 2
         x: 441
@@ -5134,7 +5134,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_117
+      name: Yellow Guy Jump 2
       rect:
         serializedVersion: 2
         x: 567
@@ -5638,7 +5638,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_141
+      name: Brown Guy Jump 1
       rect:
         serializedVersion: 2
         x: 441
@@ -5764,7 +5764,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tilemap_packed_147
+      name: Brown Guy Jump 2
       rect:
         serializedVersion: 2
         x: 567
