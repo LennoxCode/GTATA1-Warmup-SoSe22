@@ -547,10 +547,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 71018114}
-  possibleSprites:
-  - {fileID: -9183657544205018418, guid: fcd1812c475621b47b85bf35aa3bc31b, type: 3}
-  - {fileID: 6481843683198900548, guid: fcd1812c475621b47b85bf35aa3bc31b, type: 3}
-  - {fileID: 5343863954073821178, guid: fcd1812c475621b47b85bf35aa3bc31b, type: 3}
 --- !u!1 &490508151
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +756,7 @@ GameObject:
   - component: {fileID: 697126559}
   - component: {fileID: 697126558}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: AudioManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -776,11 +772,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 94e6c334bfa5e3040bbe4968260ab727, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.444
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -875,9 +871,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 697126558}
-  jumpSound: {fileID: 8300000, guid: fecea557696c183449346519a7ed5f66, type: 3}
-  collisionSound: {fileID: 0}
-  touchGroundSound: {fileID: 0}
+  jumpSound: {fileID: 8300000, guid: 0964ce3b8f962fe4aa3c75bac74b4a09, type: 3}
+  collisionSound: {fileID: 8300000, guid: 4fde371319373d243bea4f67acc4de88, type: 3}
+  touchGroundSound: {fileID: 8300000, guid: 8b95544fd1ee1b146930dc057e01fec7, type: 3}
+  clickSound: {fileID: 8300000, guid: 331418693f1c7cb479d1a6f65bccc5ee, type: 3}
 --- !u!4 &697126560
 Transform:
   m_ObjectHideFlags: 0

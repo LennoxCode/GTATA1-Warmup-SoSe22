@@ -47,6 +47,7 @@ namespace Scripts
                 // A coroutine runs next to the game loop and is useful for all operations that have a well known time box.
                 // If "while(true)" is analogue to this "Update" function
                 // then "for(var i = 0; i < count; i++)" is like a Coroutine
+                AudioController.AInstance.PlayCollisionSound();
                 StartCoroutine(ResetGame());
             }
         }

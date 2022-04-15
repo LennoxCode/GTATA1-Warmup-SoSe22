@@ -90,8 +90,11 @@ namespace Scripts
                 if (sampleTime > 0.95f)
                 {
                     canJump = true;
+                    
                     animator.SetBool("IsJumping", false);
+                    //
                 }
+                
                 // yield return null waits a single frame
                 yield return null;
             }

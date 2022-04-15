@@ -12,7 +12,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioClip collisionSound;
 
     [SerializeField] private AudioClip touchGroundSound;
-
+    [SerializeField] private AudioClip clickSound;
     public static AudioController AInstance;
     // Start is called before the first frame update
     private void Awake()
@@ -23,11 +23,21 @@ public class AudioController : MonoBehaviour
 
     public void PlayJumpSound()
     {
-        audioSource.PlayOneShot(jumpSound);
+        audioSource.PlayOneShot(jumpSound, 0.3f);
     }
 
     public void PlayCollisionSound()
     {
-        audioSource.PlayOneShot(collisionSound);
+        audioSource.PlayOneShot(collisionSound, 0.4f);
+    }
+
+    public void PlayClickSound()
+    {
+        audioSource.PlayOneShot(clickSound);
+    }
+
+    public void PlayGroundHitSound()
+    {
+        audioSource.PlayOneShot(touchGroundSound);
     }
 }
