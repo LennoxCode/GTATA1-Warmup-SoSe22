@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Scripts
 {
@@ -7,6 +9,7 @@ namespace Scripts
     /// </summary>
     public class ShipController : MonoBehaviour
     {
+        private static AsteroidGameController _runGameController;
         [SerializeField] [Range(0, 10)] private float speed;
         [SerializeField] [Range(0, 10)] private float rotationSpeed;
         private MovementObject playerShip;
@@ -15,6 +18,7 @@ namespace Scripts
         {
             transform.rotation = Quaternion.Euler(0, 0, Random.value * 360);
             playerShip = GetComponent<MovementObject>();
+            if (_runGameController == null) _runGameController = FindObjectOfType<AsteroidGameController>();
         }
 
         private void Update()
@@ -31,6 +35,12 @@ namespace Scripts
 
             playerShip.Impulse(transform.up * (Time.deltaTime * speed * forward), Vector3.zero);
             playerShip.Add(Vector3.zero, new Vector3(0, 0, rotation * Time.deltaTime * rotationSpeed * 3.6f));
+            _runGameController.ShipIntersection(null); 
+        }
+
+        private void LateUpdate()
+        {
+          
         }
     }
 }

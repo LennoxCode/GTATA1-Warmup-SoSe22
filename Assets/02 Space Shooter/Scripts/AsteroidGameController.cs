@@ -130,6 +130,11 @@ namespace Scripts
 
         public void ShipIntersection(SpriteRenderer ship)
         {
+            
+            var asteroid = activeAsteroids
+                .FirstOrDefault(x => x.GetComponent<SpriteRenderer>().bounds.Intersects(playerShip.shipSprite.bounds));
+            if (asteroid == null) return;
+            Debug.LogError("you just lost the game");
             // :thinking: this could be solved very similarly to a laser intersection
         }
 
