@@ -7,7 +7,11 @@ public class MenuController : MonoBehaviour
 {
     private GameObject VictoryScreen;
 
-    private GameObject LooseScreen;
+    [SerializeField]private GameObject looseScreen;
+
+    [SerializeField] private GameObject victoryScreen;
+
+    public Action onRestart;
     // Start is called before the first frame update
     public static MenuController instance;
 
@@ -23,12 +27,19 @@ public class MenuController : MonoBehaviour
 
     public void ShowVictoryScreen()
     {
-        
+        victoryScreen.SetActive(true);
     }
 
     public void ShowLooseScreen()
     {
-        
+        looseScreen.SetActive(true);
+    }
+
+    public void OnRestartPressed()
+    {
+        victoryScreen.SetActive(false);
+        looseScreen.SetActive(false);
+        onRestart.Invoke();
     }
     
 }

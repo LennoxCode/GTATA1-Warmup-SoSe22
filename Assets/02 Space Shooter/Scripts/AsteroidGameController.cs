@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -13,13 +14,18 @@ namespace Scripts
         public Asteroid[] bigAsteroids;
         public Asteroid[] mediumAsteroids;
         public Asteroid[] smallAsteroids;
-
+        
         [SerializeField] private Vector3 maximumSpeed, maximumSpin;
         [SerializeField] private PlayerShip playerShip;
         [SerializeField] private Transform spawnAnchor;
 
         private List<Asteroid> activeAsteroids;
         private Random random;
+
+        private void Awake()
+        {
+            MenuController.instance.onRestart += RestartGame;
+        }
 
         private void Start()
         {
@@ -87,7 +93,22 @@ namespace Scripts
             activeAsteroids.Add(newObject);
         }
 
-
+        private void RestartGame()
+        {
+            Debug.Log("restart");
+            foreach (var activeAsteroid in activeAsteroids)
+            { 
+                Destroy(activeAsteroid.gameObject);
+                
+            }
+            activeAsteroids.Clear();
+            random = new Random();
+            // spawn some initial asteroids
+            for (var i = 0; i < 5; i++)
+            {
+                SpawnAsteroid(bigAsteroids, Camera.main.OrthographicBounds());
+            }
+        }
         /// <summary>
         /// Checks if a laser is intersecting with an asteroid and executes gameplay behaviour on that
         /// </summary>
