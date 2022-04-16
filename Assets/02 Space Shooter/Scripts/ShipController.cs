@@ -36,6 +36,7 @@ namespace Scripts
             playerShip.Impulse(transform.up * (Time.deltaTime * speed * forward), Vector3.zero);
             playerShip.Add(Vector3.zero, new Vector3(0, 0, rotation * Time.deltaTime * rotationSpeed * 3.6f));
             _runGameController.ShipIntersection(null); 
+            
         }
 
         private void LateUpdate()

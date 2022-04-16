@@ -32,6 +32,10 @@ namespace Scripts
             }
         }
 
+        void Update()
+        {
+            if(activeAsteroids.Count == 0)MenuController.instance.ShowVictoryScreen();
+        }
         /// <summary>
         /// Behaviour to spawn an asteroid within the screen
         /// If there is a parent given, the velocity of that parent is put into consideration
@@ -134,8 +138,7 @@ namespace Scripts
             var asteroid = activeAsteroids
                 .FirstOrDefault(x => x.GetComponent<SpriteRenderer>().bounds.Intersects(playerShip.shipSprite.bounds));
             if (asteroid == null) return;
-            Debug.LogError("you just lost the game");
-            // :thinking: this could be solved very similarly to a laser intersection
+            MenuController.instance.ShowLooseScreen();
         }
 
         private static float RandomPointOnLine(float min, float max)
