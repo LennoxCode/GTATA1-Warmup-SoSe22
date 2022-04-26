@@ -6,7 +6,7 @@ public class PowerUp : MonoBehaviour
 {
     public Effect effect;
     public SpriteRenderer spriteRenderer;
-    
+    public static float duration = 3f;
 }
 public enum Effect
 {

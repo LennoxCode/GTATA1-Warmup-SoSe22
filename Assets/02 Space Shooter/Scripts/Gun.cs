@@ -10,33 +10,46 @@ namespace Scripts
     {
         [SerializeField] private Laser laserPrefab;
         private PlayerShip ship;
-        private LambdaExpression currentShooter;
+        private bool hasTripleShot = false;
         private void Start()
         {
             ship = GetComponent<PlayerShip>();
-           // currentShooter = Fire();
+            FindObjectOfType<AsteroidGameController>().activatedPowerUp += ActivatePowerUP;
         }
 
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                TripleShot();
+               if(hasTripleShot) TripleFire();
+               else Fire();
             }
         }
 
+        private void ActivatePowerUP(Effect effect)
+        {
+            if (effect != Effect.TripleShot) return;
+            hasTripleShot = true;
+            Invoke("DeactivatePowerUP", PowerUp.duration);
+
+        }
+
+        private void DeactivatePowerUP()
+        {
+            hasTripleShot = false;
+        }
         private void Fire()
         {
             laserPrefab.initialVelocity = ship.movementObject.CurrentVelocity;
             Instantiate(laserPrefab, transform.position, transform.rotation);
         }
 
-        private void TripleShot()
+        private void TripleFire()
         {
             laserPrefab.initialVelocity = ship.movementObject.CurrentVelocity;
             Instantiate(laserPrefab, transform.position, transform.rotation);
-            Instantiate(laserPrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, 45));
-            Instantiate(laserPrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, -45));
+            Instantiate(laserPrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, 33));
+            Instantiate(laserPrefab, transform.position, transform.rotation * Quaternion.Euler(0, 0, -33));
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace Scripts
         public Asteroid[] mediumAsteroids;
         public Asteroid[] smallAsteroids;
         public PowerUp[] powerUps;
+
+        public Action<Effect> activatedPowerUp;
         [SerializeField] private Vector3 maximumSpeed, maximumSpin;
         [SerializeField] private PlayerShip playerShip;
         [SerializeField] private Transform spawnAnchor;
@@ -39,7 +42,9 @@ namespace Scripts
             {
                 SpawnAsteroid(bigAsteroids, Camera.main.OrthographicBounds());
             }
-            SpawnPowerUp(powerUps, Camera.main.OrthographicBounds());
+            //SpawnPowerUp(powerUps, Camera.main.OrthographicBounds());
+            activatedPowerUp += ActivatePowerUP;
+            StartCoroutine(SpawnPowerUp(powerUps, Camera.main.OrthographicBounds()));
         }
 
         void Update()
@@ -97,7 +102,7 @@ namespace Scripts
             activeAsteroids.Add(newObject);
         }
 
-        private void SpawnPowerUp(PowerUp[] prefabs, Bounds inLocation)
+        private IEnumerator SpawnPowerUp(PowerUp[] prefabs, Bounds inLocation)
         {
             var prefab = prefabs[random.Next(prefabs.Length)];
             // create an instance of the prefab
@@ -105,6 +110,7 @@ namespace Scripts
             // position it randomly within the box given (either the parent asteroid or the camera)
             newObject.transform.position = RandomPointInBounds(inLocation);
             activePowerUps.Add(newObject);
+            yield return new WaitForSeconds(2.5f);
         }
         private void RestartGame()
         {
@@ -180,10 +186,23 @@ namespace Scripts
             var powerUP = activePowerUps
                 .FirstOrDefault(x => x.GetComponent<SpriteRenderer>().bounds.Intersects(playerShip.shipSprite.bounds));
             if (powerUP == null) return;
-            Debug.Log("got power up");
             activePowerUps.Remove(powerUP);
             Destroy(powerUP.gameObject);
+            activatedPowerUp.Invoke(powerUP.effect);
+
+        }
+
+        private void ActivatePowerUP(Effect effect)
+        {
+            if(effect != Effect.SlowMotion) return;
+            Time.timeScale = 0.5f;
+            Invoke("DeactiveatePowerUp", PowerUp.duration);
             
+        }
+
+        private void DeactiveatePowerUp()
+        {
+            Time.timeScale = 1f;
         }
         private static float RandomPointOnLine(float min, float max)
         {
