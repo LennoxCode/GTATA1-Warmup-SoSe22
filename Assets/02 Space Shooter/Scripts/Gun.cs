@@ -11,14 +11,17 @@ namespace Scripts
         [SerializeField] private Laser laserPrefab;
         private PlayerShip ship;
         private bool hasTripleShot = false;
+        private static AsteroidGameController _runGameController;
         private void Start()
         {
             ship = GetComponent<PlayerShip>();
-            FindObjectOfType<AsteroidGameController>().activatedPowerUp += ActivatePowerUP;
+            _runGameController = FindObjectOfType<AsteroidGameController>();
+            _runGameController.activatedPowerUp += ActivatePowerUP;
         }
 
         private void Update()
         {
+            if (!_runGameController.isGameActive) return;
             if (Input.GetKeyDown(KeyCode.Space))
             {
                if(hasTripleShot) TripleFire();

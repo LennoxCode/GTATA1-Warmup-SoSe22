@@ -117,3 +117,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effect: 1
   spriteRenderer: {fileID: 5770839883420707117}
+  movementObject: {fileID: 5770839883420707116}

@@ -45,6 +45,7 @@ namespace Scripts
         }
         private void Update()
         {
+            if (!_runGameController.isGameActive) return;
             // clockwise rotation is negative euler z rotation, anti-clockwise is positive
             var rotation = 0f;
             if (Input.GetKey(KeyCode.D)) rotation += 1f;

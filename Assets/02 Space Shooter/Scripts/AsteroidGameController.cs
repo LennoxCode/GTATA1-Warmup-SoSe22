@@ -16,16 +16,17 @@ namespace Scripts
         public Asteroid[] mediumAsteroids;
         public Asteroid[] smallAsteroids;
         public PowerUp[] powerUps;
-
+        public bool isGameActive { get; private set; } 
         public Action<Effect> activatedPowerUp;
+        
         [SerializeField] private Vector3 maximumSpeed, maximumSpin;
         [SerializeField] private PlayerShip playerShip;
         [SerializeField] private Transform spawnAnchor;
-
+        [SerializeField] private int maximumPowerUPs;
         private List<Asteroid> activeAsteroids;
         private Random random;
         private List<PowerUp> activePowerUps;
-
+        private float lastPlayerHit = 0;
         private void Awake()
         {
            
@@ -45,11 +46,16 @@ namespace Scripts
             //SpawnPowerUp(powerUps, Camera.main.OrthographicBounds());
             activatedPowerUp += ActivatePowerUP;
             StartCoroutine(SpawnPowerUp(powerUps, Camera.main.OrthographicBounds()));
+            isGameActive = true;
         }
 
         void Update()
         {
-            if(activeAsteroids.Count == 0)MenuController.instance.ShowVictoryScreen();
+            if (activeAsteroids.Count == 0)
+            {
+                MenuController.instance.ShowVictoryScreen();
+                isGameActive = false;
+            }
         }
         /// <summary>
         /// Behaviour to spawn an asteroid within the screen
@@ -104,17 +110,22 @@ namespace Scripts
 
         private IEnumerator SpawnPowerUp(PowerUp[] prefabs, Bounds inLocation)
         {
-            var prefab = prefabs[random.Next(prefabs.Length)];
-            // create an instance of the prefab
-            var newObject = Instantiate(prefab, spawnAnchor);
-            // position it randomly within the box given (either the parent asteroid or the camera)
-            newObject.transform.position = RandomPointInBounds(inLocation);
-            activePowerUps.Add(newObject);
-            yield return new WaitForSeconds(2.5f);
+            while (true)
+            {
+                if(activePowerUps.Count < maximumPowerUPs && isGameActive){
+                    var prefab = prefabs[random.Next(prefabs.Length)];
+                    // create an instance of the prefab
+                    var newObject = Instantiate(prefab, spawnAnchor);
+                    // position it randomly within the box given (either the parent asteroid or the camera)
+                    newObject.transform.position = RandomPointInBounds(inLocation);
+                    newObject.movementObject.Impulse(RandomizeVector(maximumSpeed / 3), new Vector3(0,0,0));
+                    activePowerUps.Add(newObject);
+                }
+                yield return new WaitForSeconds(5f);
+            }
         }
         private void RestartGame()
         {
-            Debug.Log("restart");
             foreach (var activeAsteroid in activeAsteroids)
             { 
                 Destroy(activeAsteroid.gameObject);
@@ -122,7 +133,6 @@ namespace Scripts
             }
             activeAsteroids.Clear();
             random = new Random();
-            // spawn some initial asteroids
             for (var i = 0; i < 5; i++)
             {
                 SpawnAsteroid(bigAsteroids, Camera.main.OrthographicBounds());
@@ -174,11 +184,18 @@ namespace Scripts
 
         public void ShipIntersection(SpriteRenderer ship)
         {
-            
+            if (Time.time - lastPlayerHit < 3f) return;
             var asteroid = activeAsteroids
                 .FirstOrDefault(x => x.GetComponent<SpriteRenderer>().bounds.Intersects(playerShip.shipSprite.bounds));
             if (asteroid == null) return;
-            MenuController.instance.ShowLooseScreen();
+            lastPlayerHit = Time.time;
+            PlayerStats.health--;
+            if (PlayerStats.health == 0)
+            {
+                MenuController.instance.ShowLooseScreen();
+                isGameActive = false;
+            }
+            
         }
 
         public void PowerUpIntersection(SpriteRenderer ship)
