@@ -267,6 +267,8 @@ MonoBehaviour:
   smallAsteroids:
   - {fileID: -7790408946879200300, guid: 3bfc870f39b6f664490de35d76319b9b, type: 3}
   - {fileID: 1849420702270535319, guid: 79168661fc099804baa7dd4259d6458b, type: 3}
+  powerUps:
+  - {fileID: 5770839883420707119, guid: 7a02b223b58d4914aaa5f3e638d4cd20, type: 3}
   maximumSpeed: {x: 2, y: 2, z: 0}
   maximumSpin: {x: 0, y: 0, z: 2}
   playerShip: {fileID: 1493469882}

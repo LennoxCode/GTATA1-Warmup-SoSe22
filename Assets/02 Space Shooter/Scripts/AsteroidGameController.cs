@@ -14,28 +14,32 @@ namespace Scripts
         public Asteroid[] bigAsteroids;
         public Asteroid[] mediumAsteroids;
         public Asteroid[] smallAsteroids;
-        
+        public PowerUp[] powerUps;
         [SerializeField] private Vector3 maximumSpeed, maximumSpin;
         [SerializeField] private PlayerShip playerShip;
         [SerializeField] private Transform spawnAnchor;
 
         private List<Asteroid> activeAsteroids;
         private Random random;
+        private List<PowerUp> activePowerUps;
 
         private void Awake()
         {
-            MenuController.instance.onRestart += RestartGame;
+           
         }
 
         private void Start()
         {
+            MenuController.instance.onRestart += RestartGame;
             activeAsteroids = new List<Asteroid>();
+            activePowerUps = new List<PowerUp>();
             random = new Random();
             // spawn some initial asteroids
             for (var i = 0; i < 5; i++)
             {
                 SpawnAsteroid(bigAsteroids, Camera.main.OrthographicBounds());
             }
+            SpawnPowerUp(powerUps, Camera.main.OrthographicBounds());
         }
 
         void Update()
@@ -93,6 +97,15 @@ namespace Scripts
             activeAsteroids.Add(newObject);
         }
 
+        private void SpawnPowerUp(PowerUp[] prefabs, Bounds inLocation)
+        {
+            var prefab = prefabs[random.Next(prefabs.Length)];
+            // create an instance of the prefab
+            var newObject = Instantiate(prefab, spawnAnchor);
+            // position it randomly within the box given (either the parent asteroid or the camera)
+            newObject.transform.position = RandomPointInBounds(inLocation);
+            activePowerUps.Add(newObject);
+        }
         private void RestartGame()
         {
             Debug.Log("restart");
@@ -162,6 +175,16 @@ namespace Scripts
             MenuController.instance.ShowLooseScreen();
         }
 
+        public void PowerUpIntersection(SpriteRenderer ship)
+        {
+            var powerUP = activePowerUps
+                .FirstOrDefault(x => x.GetComponent<SpriteRenderer>().bounds.Intersects(playerShip.shipSprite.bounds));
+            if (powerUP == null) return;
+            Debug.Log("got power up");
+            activePowerUps.Remove(powerUP);
+            Destroy(powerUP.gameObject);
+            
+        }
         private static float RandomPointOnLine(float min, float max)
         {
             return UnityEngine.Random.value * (max - min) + min;
