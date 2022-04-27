@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Scripts
 {
@@ -9,9 +10,16 @@ namespace Scripts
     {
         [SerializeField] private BrickType brickType;
         [SerializeField] private Upgrade upgradePrefab;
+        public static int count { private set; get;  }
+
+        private void Start()
+        {
+            count++;
+        }
 
         private void OnDestroy()
         {
+            count--;
             if (brickType == BrickType.Upgrade)
             {
                 var upgrade = Instantiate(upgradePrefab, transform.parent);

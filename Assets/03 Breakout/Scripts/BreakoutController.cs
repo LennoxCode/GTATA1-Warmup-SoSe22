@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,12 +10,13 @@ namespace Scripts
         [SerializeField] [Range(0, 1000)] private float speed;
         [SerializeField] [Range(0, 384)] private float pedalSize;
         [SerializeField] private List<Ball> balls;
+        [SerializeField] private List<Brick> bricks;
         private CapsuleCollider2D collider;
         private RectTransform rectTransform;
         private Rigidbody2D rigidBody;
         private int upgradeCollisionId;
 
-
+        public static Action<bool> onGameOver;
         /// <summary>
         /// FixedUpdate is a Unity runtime function called *every physics* frame
         /// see: https://docs.unity3d.com/Manual/ExecutionOrder.html
@@ -40,11 +42,18 @@ namespace Scripts
 
             // remove all destroyed balls
             balls = balls.Where(x => x != null).ToList();
+            bricks = bricks.Where(x => x != null).ToList();
             // if there are no balls left, the game is lost
+            if (Brick.count == 0)
+            {
+                onGameOver.Invoke(true);
+                Time.timeScale = 0;
+            } 
             if (balls.Count == 0)
             {
                 // maybe this is a good entry point for a loss system, similarly no bricks -> win
-                Debug.Log("Game Over!");
+           
+                onGameOver.Invoke(false);
                 Time.timeScale = 0f;
             }
         }
@@ -55,8 +64,9 @@ namespace Scripts
             collider = GetComponent<CapsuleCollider2D>();
             rectTransform = GetComponent<RectTransform>();
             upgradeCollisionId = LayerMask.NameToLayer("Upgrade");
+            
         }
-
+        
         /// <summary>
         /// Collision event triggered from Unity when two colliders (in the physics collision layer matrix) collide with
         /// each other 
