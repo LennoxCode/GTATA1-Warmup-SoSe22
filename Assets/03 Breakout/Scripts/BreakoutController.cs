@@ -46,14 +46,14 @@ namespace Scripts
             // if there are no balls left, the game is lost
             if (Brick.count == 0)
             {
-                onGameOver.Invoke(true);
-                Time.timeScale = 0;
+                onGameOver?.Invoke(true);
+                Time.timeScale = 0f;
             } 
             if (balls.Count == 0)
             {
                 // maybe this is a good entry point for a loss system, similarly no bricks -> win
            
-                onGameOver.Invoke(false);
+                onGameOver?.Invoke(false);
                 Time.timeScale = 0f;
             }
         }
@@ -90,6 +90,9 @@ namespace Scripts
                         ball.transform.position = balls[0].transform.position;
                         ball.RigidBody.velocity = Vector2.Reflect(balls[0].RigidBody.velocity, Vector2.up);
                         balls.Add(ball);
+                        break;
+                    case UpgradeType.BiggerBall:
+                        balls.ForEach(ball => ball.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f));
                         break;
                 }
 

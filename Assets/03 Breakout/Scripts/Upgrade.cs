@@ -37,7 +37,7 @@ namespace Scripts
                 return;
             }
 
-            upgradeType = UpgradeType.ExtraBall;
+            upgradeType = UpgradeType.BiggerBall;
         }
 
         [Serializable]
