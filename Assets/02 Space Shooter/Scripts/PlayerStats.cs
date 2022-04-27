@@ -2,7 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// this function holds the state of the player health. it also hold a reference to
+/// a sprite renderer and related sprites to swap out at will
+/// a neat side effect of adding this to the ship gameobject is the fact
+/// that the health is displayed on top of the ship which almost makes
+/// the HUD diagetic 
+/// </summary>
 public class PlayerStats : MonoBehaviour
 {
     public static PlayerStats instance;

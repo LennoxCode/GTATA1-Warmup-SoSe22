@@ -28,7 +28,9 @@ namespace Scripts
                else Fire();
             }
         }
-
+        /// <summary>
+        /// same logic for the powerUP: it is subscribed to the related event and applies its effect
+        /// </summary>
         private void ActivatePowerUP(Effect effect)
         {
             if (effect != Effect.TripleShot) return;
@@ -46,7 +48,10 @@ namespace Scripts
             laserPrefab.initialVelocity = ship.movementObject.CurrentVelocity;
             Instantiate(laserPrefab, transform.position, transform.rotation);
         }
-
+        /// <summary>
+        /// this function is called as an alternative to the normal fire
+        /// it fires three projectiles instead of one each angled 33 degrees
+        /// </summary>
         private void TripleFire()
         {
             laserPrefab.initialVelocity = ship.movementObject.CurrentVelocity;

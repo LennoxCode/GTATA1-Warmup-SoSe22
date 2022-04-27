@@ -5,6 +5,8 @@ namespace Scripts
 {
     /// <summary>
     /// Brick component spawns an upgrade if it is marked as upgrade
+    /// i decided to use a static variable to keep count of all the bricks
+    /// this makes it easy to keep track of them. if i had used a serializable field it would be too level dependent
     /// </summary>
     public class Brick : MonoBehaviour
     {

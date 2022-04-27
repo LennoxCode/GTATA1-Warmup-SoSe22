@@ -27,11 +27,6 @@ namespace Scripts
         private Random random;
         private List<PowerUp> activePowerUps;
         private float lastPlayerHit = 0;
-        private void Awake()
-        {
-           
-        }
-
         private void Start()
         {
             MenuController.instance.onRestart += RestartGame;
@@ -43,7 +38,6 @@ namespace Scripts
             {
                 SpawnAsteroid(bigAsteroids, Camera.main.OrthographicBounds());
             }
-            //SpawnPowerUp(powerUps, Camera.main.OrthographicBounds());
             activatedPowerUp += ActivatePowerUP;
             StartCoroutine(SpawnPowerUp(powerUps, Camera.main.OrthographicBounds()));
             isGameActive = true;
@@ -107,7 +101,11 @@ namespace Scripts
 
             activeAsteroids.Add(newObject);
         }
-
+        /// <summary>
+        /// this function is similar in the nature to spawnAsteroid. the main difference is that
+        /// I implemented it as a coroutine to ensure that powerups are spawned continuously
+        /// throughout the game
+        /// </summary>
         private IEnumerator SpawnPowerUp(PowerUp[] prefabs, Bounds inLocation)
         {
             while (true)
@@ -116,7 +114,7 @@ namespace Scripts
                     var prefab = prefabs[random.Next(prefabs.Length)];
                     // create an instance of the prefab
                     var newObject = Instantiate(prefab, spawnAnchor);
-                    // position it randomly within the box given (either the parent asteroid or the camera)
+                    // position it randomly within the box given
                     newObject.transform.position = RandomPointInBounds(inLocation);
                     newObject.movementObject.Impulse(RandomizeVector(maximumSpeed / 3), new Vector3(0,0,0));
                     activePowerUps.Add(newObject);
@@ -124,6 +122,11 @@ namespace Scripts
                 yield return new WaitForSeconds(5f);
             }
         }
+        /// <summary>
+        /// This function is responsible for all the backend stuff that needs to happen to start
+        /// a new game. it is subscribed to the restart game action which gets called when the
+        /// related button is pressed. It just deletes all asteroids and powerUPS. and spawns new ones
+        /// </summary>
         private void RestartGame()
         {
             foreach (var activeAsteroid in activeAsteroids)
@@ -189,14 +192,19 @@ namespace Scripts
             // oh, also get rid of the laser now
             Destroy(laser.gameObject);
         }
-
+        /// <summary>
+        /// Checks if am asteroid is intersecting with the ship and executes gameplay behaviour on that
+        /// it works basically the same as the LaserIntersection function
+        /// </summary>
         public void ShipIntersection(SpriteRenderer ship)
         {
+            //if the player has been hit in the last 1.5 seconds nothing happens because if not one instantly loses
             if (Time.time - lastPlayerHit < 1.5f) return;
             var asteroid = activeAsteroids
                 .FirstOrDefault(x => x.GetComponent<SpriteRenderer>().bounds.Intersects(playerShip.shipSprite.bounds));
             if (asteroid == null) return;
             lastPlayerHit = Time.time;
+            //health is subtracted and when it reaches zero it is game over
             PlayerStats.instance.health--;
             if (PlayerStats.instance.health == 0)
             {
@@ -205,7 +213,11 @@ namespace Scripts
             }
             
         }
-
+        /// <summary>
+        /// Checks if am powerUP is intersecting with the ship and executes gameplay behaviour on that
+        /// it works basically the same as the LaserIntersection function.
+        /// It invokes an action and the responsible gamecocks react only if they can make use of the powerUP effect
+        /// </summary>
         public void PowerUpIntersection(SpriteRenderer ship)
         {
             var powerUP = activePowerUps
@@ -216,7 +228,11 @@ namespace Scripts
             activatedPowerUp.Invoke(powerUP.effect);
 
         }
-
+        /// <summary>
+        /// applies the effect the slowMotion PowerUP. if the effect of the event is a different one it returns
+        /// it just simply halves the timescale and after the amount of seconds defined by the powerup class
+        /// the effect is cancelled. I used Invoke to achieve that which just calls a function after x amount of time
+        /// </summary>
         private void ActivatePowerUP(Effect effect)
         {
             if(effect != Effect.SlowMotion) return;
@@ -224,7 +240,7 @@ namespace Scripts
             Invoke("DeactiveatePowerUp", PowerUp.duration);
             
         }
-
+        
         private void DeactiveatePowerUp()
         {
             Time.timeScale = 1f;

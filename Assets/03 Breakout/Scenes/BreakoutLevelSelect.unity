@@ -1684,8 +1684,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levels:
-  - {fileID: 102900000, guid: 57a79715adbc15846bde5fd4ae815d05, type: 3}
-  - {fileID: 102900000, guid: 59f88ad9e0d689a48ba3bd27c3932d93, type: 3}
+  - BreakoutLevel1
+  - BreakoutLevel2
 --- !u!1 &2104196562
 GameObject:
   m_ObjectHideFlags: 0

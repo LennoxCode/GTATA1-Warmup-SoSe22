@@ -31,7 +31,6 @@ namespace Scripts
         {
             if (effect == Effect.Shield)
             {
-                Debug.Log("setting shields active");
                 shield.enabled = true;
                 isShieldActive = true;
                 Invoke("DeactiveatePowerUp", PowerUp.duration);

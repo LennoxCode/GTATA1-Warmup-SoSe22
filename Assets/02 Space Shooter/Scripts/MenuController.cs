@@ -2,7 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This class is used for all the menu stuff. it once again uses the singleton pattern
+/// to avoid unnecessary object searches it just hold references to the screen objects
+/// and shows them on demand. there is also an action if the restart button is pressed
+/// </summary>
 public class MenuController : MonoBehaviour
 {
     private GameObject VictoryScreen;
@@ -19,11 +23,7 @@ public class MenuController : MonoBehaviour
     {
         instance = this;
     }
-
-    void Start()
-    {
-        
-    }
+    
 
     public void ShowVictoryScreen()
     {

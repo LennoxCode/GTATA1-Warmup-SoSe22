@@ -46,6 +46,8 @@ namespace Scripts
             // if there are no balls left, the game is lost
             if (Brick.count == 0)
             {
+                //events once again. i learned that it is better to use the == null question mark
+                //because if nobody is subscribed it throws a null exception
                 onGameOver?.Invoke(true);
                 Time.timeScale = 0f;
             } 

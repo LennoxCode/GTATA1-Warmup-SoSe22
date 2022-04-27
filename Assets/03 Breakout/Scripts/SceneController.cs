@@ -2,43 +2,52 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Scripts;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour
+namespace Scripts
 {
-    public static SceneController instance;
-    private int currentLevelIndex;
-    [SerializeField] private SceneAsset[] levels;
-    
-    // Start is called before the first frame update
-    private void Awake()
+    /// <summary>
+    /// this class is responsible for changing scenes and reloading.
+    /// it is subscribed to two events of the menuController
+    /// 
+    /// </summary>
+    public class SceneController : MonoBehaviour
     {
-        DontDestroyOnLoad(gameObject);
-        EndScreenController.restartGame -= ReloadCurrentLevel;
-        EndScreenController.restartGame += ReloadCurrentLevel;
-        EndScreenController.loadNextLevel -= LoadNextLevel;
-        EndScreenController.loadNextLevel += LoadNextLevel;
-    }
+        private int currentLevelIndex;
+        //these used to be levelAssets but it gave me too much hassle when building
+        [SerializeField] private String[] levels;
 
-    public void LoadLevel(int sceneIndex)
-    {
-       SceneManager.LoadScene(levels[sceneIndex].name);
-    }
+        // this class uses dont destroy on load so it gets carried over between scenes
+        // an ensure that the state remains untouched
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+            EndScreenController.restartGame -= ReloadCurrentLevel;
+            EndScreenController.restartGame += ReloadCurrentLevel;
+            EndScreenController.loadNextLevel -= LoadNextLevel;
+            EndScreenController.loadNextLevel += LoadNextLevel;
+        }
 
-    public void LoadNextLevel()
-    {
-        if (currentLevelIndex == levels.Length) return;
-        currentLevelIndex++;
-        SceneManager.LoadScene(levels[currentLevelIndex].name);
-        
-    }
+        public void LoadLevel(int sceneIndex)
+        {
+            currentLevelIndex = sceneIndex;
+            SceneManager.LoadScene(levels[sceneIndex]);
+        }
 
-    public void ReloadCurrentLevel()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+        public void LoadNextLevel()
+        {
+            if (currentLevelIndex >= levels.Length - 1) currentLevelIndex = 0;
+            else currentLevelIndex++;
+            SceneManager.LoadScene(levels[currentLevelIndex]);
 
+        }
+
+        public void ReloadCurrentLevel()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+
+        }
     }
 }
