@@ -131,12 +131,20 @@ namespace Scripts
                 Destroy(activeAsteroid.gameObject);
                 
             }
+
+            foreach (PowerUp powerUP in activePowerUps)
+            {
+                Destroy(powerUP.gameObject);
+            }
             activeAsteroids.Clear();
+            activePowerUps.Clear();
+            PlayerStats.instance.ResetHealth();
             random = new Random();
             for (var i = 0; i < 5; i++)
             {
                 SpawnAsteroid(bigAsteroids, Camera.main.OrthographicBounds());
             }
+            isGameActive = true;
         }
         /// <summary>
         /// Checks if a laser is intersecting with an asteroid and executes gameplay behaviour on that
@@ -184,13 +192,13 @@ namespace Scripts
 
         public void ShipIntersection(SpriteRenderer ship)
         {
-            if (Time.time - lastPlayerHit < 3f) return;
+            if (Time.time - lastPlayerHit < 1.5f) return;
             var asteroid = activeAsteroids
                 .FirstOrDefault(x => x.GetComponent<SpriteRenderer>().bounds.Intersects(playerShip.shipSprite.bounds));
             if (asteroid == null) return;
             lastPlayerHit = Time.time;
-            PlayerStats.health--;
-            if (PlayerStats.health == 0)
+            PlayerStats.instance.health--;
+            if (PlayerStats.instance.health == 0)
             {
                 MenuController.instance.ShowLooseScreen();
                 isGameActive = false;
