@@ -24,20 +24,26 @@ namespace Scripts
         private void RandomizeType()
         {
             var number = Random.value;
-
-            if (number < 0.33f)
+            if (number < 0.25f)
             {
                 upgradeType = UpgradeType.BiggerPedal;
                 return;
             }
 
-            if (number < 0.66f)
+            if (number < 0.5f)
             {
                 upgradeType = UpgradeType.SmallerPedal;
                 return;
             }
 
+            if (number < 0.75f)
+            {
+                upgradeType = UpgradeType.ExtraBall;
+                return;
+            }
+
             upgradeType = UpgradeType.BiggerBall;
+
         }
 
         [Serializable]

@@ -15,10 +15,17 @@ namespace Scripts
         [SerializeField] private GameObject victoryScreen;
         [SerializeField] private GameObject defeatScreen;
 
+  
+
         void Start()
         {
             BreakoutController.onGameOver += ShowGameOver;
             HideMenus();
+        }
+
+        private void OnDestroy()
+        {
+            BreakoutController.onGameOver -= ShowGameOver;
         }
 
         // Update is called once per frame
@@ -28,6 +35,7 @@ namespace Scripts
 
         private void ShowGameOver(bool hasWon)
         {
+            backGround = GetComponent<Image>();
             backGround.enabled = true;
             if (hasWon) ShowVictoryScreen();
             else ShowDefeatScreen();

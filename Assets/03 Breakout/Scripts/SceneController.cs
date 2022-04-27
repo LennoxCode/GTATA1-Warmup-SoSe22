@@ -22,11 +22,6 @@ public class SceneController : MonoBehaviour
         EndScreenController.loadNextLevel += LoadNextLevel;
     }
 
-    private void Start()
-    {
-        Debug.Log("I got called");
-    }
-
     public void LoadLevel(int sceneIndex)
     {
        SceneManager.LoadScene(levels[sceneIndex].name);
@@ -35,14 +30,15 @@ public class SceneController : MonoBehaviour
     public void LoadNextLevel()
     {
         if (currentLevelIndex == levels.Length) return;
-        SceneManager.LoadScene(levels[currentLevelIndex++].name);
+        currentLevelIndex++;
+        SceneManager.LoadScene(levels[currentLevelIndex].name);
+        
     }
 
     public void ReloadCurrentLevel()
     {
-        Debug.Log("reloading current level");
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Time.timeScale = 1f;
+        
 
     }
 }

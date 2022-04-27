@@ -60,6 +60,7 @@ namespace Scripts
 
         private void OnEnable()
         {   // set some references once
+            Time.timeScale = 1.0f;
             rigidBody = GetComponent<Rigidbody2D>();
             collider = GetComponent<CapsuleCollider2D>();
             rectTransform = GetComponent<RectTransform>();
@@ -92,7 +93,7 @@ namespace Scripts
                         balls.Add(ball);
                         break;
                     case UpgradeType.BiggerBall:
-                        balls.ForEach(ball => ball.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f));
+                        balls.ForEach(ball => ball.transform.localScale += new Vector3(0.5f, 0.5f, 0.5f));
                         break;
                 }
 
